@@ -1,0 +1,104 @@
+[
+  {
+    "mappings": {
+      "dynamic": false,
+      "fields": {
+        "title": [
+          {
+            "analyzer": "lucene.standard",
+            "foldDiacritics": true,
+            "maxGrams": 10,
+            "minGrams": 2,
+            "tokenization": "edgeGram",
+            "type": "autocomplete"
+          },
+          {
+            "type": "string"
+          }
+        ]
+      }
+    }
+  },
+
+  {
+    "mappings": {
+      "dynamic": false,
+      "fields": {
+        "cast": {
+          "type": "string"
+        },
+        "fullplot": {
+          "analyzer": "lucene.english",
+          "type": "string"
+        },
+        "genres": [
+          {
+            "analyzer": "lucene.keyword",
+            "type": "string"
+          },
+          {
+            "type": "stringFacet"
+          }
+        ],
+        "imdb": {
+          "dynamic": false,
+          "fields": {
+            "rating": {
+              "type": "number"
+            }
+          },
+          "type": "document"
+        },
+        "plot": {
+          "analyzer": "lucene.english",
+          "type": "string"
+        },
+        "released": {
+          "type": "date"
+        },
+        "runtime": {
+          "type": "number"
+        },
+        "title": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "token"
+          }
+        ]
+      }
+    }
+  },
+
+  {
+    "mappings": {
+      "dynamic": false,
+      "fields": {
+        "imdb": {
+          "dynamic": false,
+          "fields": {
+            "rating": {
+              "type": "number"
+            }
+          },
+          "type": "document"
+        },
+        "released": {
+          "type": "date"
+        },
+        "runtime": {
+          "type": "number"
+        },
+        "title": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "token"
+          }
+        ]
+      }
+    }
+  }
+]
