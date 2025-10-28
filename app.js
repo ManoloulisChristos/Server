@@ -27,7 +27,7 @@ const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
 
 const corsOptions = {
-  origin: 'https://moovies-spys7.ondigitalocean.app/',
+  origin: 'https://moovies-spys7.ondigitalocean.app',
   credentials: true,
   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
 };
