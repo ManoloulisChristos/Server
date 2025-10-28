@@ -3,7 +3,7 @@ require('express-async-errors');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-mongoose.set('debug', true);
+// mongoose.set('debug', true);
 const cors = require('cors');
 const corsOptions = require('./config/corsOptions');
 const compression = require('compression');
