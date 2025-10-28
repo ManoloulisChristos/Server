@@ -2,10 +2,10 @@ require('dotenv').config();
 require('express-async-errors');
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 // mongoose.set('debug', true);
 const cors = require('cors');
-const corsOptions = require('./config/corsOptions');
+// const corsOptions = require('./config/corsOptions');
 const compression = require('compression');
 
 const cookieParser = require('cookie-parser');
@@ -25,6 +25,12 @@ const verifyJWTMiddleware = require('./middleware/verifyJWT');
 // error handler
 const notFoundMiddleware = require('./middleware/not-found');
 const errorHandlerMiddleware = require('./middleware/error-handler');
+
+const corsOptions = {
+  origin: 'https://moovies-spys7.ondigitalocean.app/',
+  credentials: true,
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
 
 app.use(compression());
 app.use(express.json());
