@@ -1,11 +1,9 @@
-const sendGrid = require('@sendgrid/mail');
+const sendEmail = require('../services/sendEmail');
 
 const User = require('../models/User');
 const PasswordReset = require('../models/PasswordReset');
 
 const { generateToken } = require('../utils/tokenEncryption');
-
-const passwordResetMessage = require('../utils/email/passwordResetMessage');
 
 const {
   BadRequestError,
@@ -64,8 +62,9 @@ const sendPasswordResetEmail = async (req, res) => {
   }
 
   // Send verification email
-  sendGrid.setApiKey(process.env.SENDGRID_API_KEY);
-  const emailText = `Hello ${user.username},
+  const to = user.email;
+  const subject = 'Reset your password';
+  const text = `Hello ${user.username},
 
   You can reset your password by copying and pasting the following link into your browser:
   ${req.headers.origin}/auth/password/validation?user=${user._id}&token=${resetPasswordToken}
@@ -74,23 +73,20 @@ const sendPasswordResetEmail = async (req, res) => {
 
   Thank You!`;
 
+  // Must be set to this value in order for the helper function to pick the correct html boilerplate
+  const message = 'password_reset';
   const verificationLink = `${req.headers.origin}/auth/password/validation?user=${user._id}&token=${resetPasswordToken}`;
 
-  sendGrid
-    .send(
-      passwordResetMessage(
-        user.email,
-        user.username,
-        emailText,
-        verificationLink
-      )
-    )
-    .then(() => {})
+  sendEmail(to, subject, text, message, verificationLink)
+    .then((result) => {
+      console.log(result);
+    })
     .catch((error) => {
+      console.log(error);
       throw new CustomError(
         undefined,
         undefined,
-        'Something went wrong, please try again'
+        'Something went wrong, please sign up again.'
       );
     });
 

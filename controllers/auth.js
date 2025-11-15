@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const sendGrid = require('@sendgrid/mail');
+const sendEmail = require('../services/sendEmail');
 
 const User = require('../models/User');
 const Session = require('../models/Session');
@@ -113,8 +113,10 @@ const register = async (req, res) => {
   }
 
   // Send verification email
-  sendGrid.setApiKey(process.env.SENDGRID_API_KEY);
-  const emailText = `Hello ${user.username},
+  const to = user.email;
+  const subject = 'Verify your email';
+
+  const text = `Hello ${user.username},
 
 Please verify your account by copying and pasting the following link into your browser:
 ${req.headers.origin}/auth/verification?user=${user._id}&token=${verificationToken}
@@ -123,19 +125,14 @@ Link expires after 24 hours, in that case you need to resend a new link.
 
 Thank You!`;
 
+  // Must be set to this value in order for the helper function to pick the correct html boilerplate
+  const message = 'verification';
   const verificationLink = `${req.headers.origin}/auth/verification?user=${user._id}&token=${verificationToken}`;
 
-  sendGrid
-    .send(
-      verificationMessage(
-        user.email,
-        user.username,
-        emailText,
-        verificationLink
-      )
-    )
-    .then(() => {
-      console.log('Email sent');
+  // send
+  sendEmail(to, subject, text, message, verificationLink)
+    .then((result) => {
+      console.log(result);
     })
     .catch((error) => {
       console.log(error);
