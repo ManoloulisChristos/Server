@@ -553,11 +553,10 @@ const verificationMessage = (verificationLink) => {
                                         color: #333333;
                                         font-size: 14px;
                                       ">
-                                      You’ve received this message because your
-                                      email address has been registered with our
-                                      site. Please click the button below to
-                                      verify your email address and confirm that
-                                      you are the owner of this account.
+                                      You’ve received this message because you
+                                      have requested a password reset. Please
+                                      click the link below to complete your
+                                      request.
                                     </p>
                                   </td>
                                 </tr>
@@ -633,7 +632,7 @@ const verificationMessage = (verificationLink) => {
                                           padding-left: 30px;
                                           padding-right: 30px;
                                         "
-                                        >CONFIRM YOUR EMAIL</a
+                                        >RESET YOUR PASSOWRD</a
                                       ></span
                                     >
                                   </td>
