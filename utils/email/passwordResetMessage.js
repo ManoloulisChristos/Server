@@ -606,7 +606,7 @@ const verificationMessage = (verificationLink) => {
                                         width: auto;
                                       "
                                       ><a
-                                        href=""
+                                        href=${verificationLink}
                                         target="_blank"
                                         class="es-button"
                                         style="
