@@ -527,7 +527,7 @@ const verificationMessage = (verificationLink) => {
                                         line-height: 46px;
                                         color: #333333;
                                       ">
-                                      Confirm Your Email
+                                      Reset Your Password
                                     </h1>
                                   </td>
                                 </tr>
